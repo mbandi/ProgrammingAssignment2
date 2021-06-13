@@ -12,8 +12,12 @@ makeCacheMatrix <- function(originalMatrix = matrix()) {
   get <- function() originalMatrix
   
   set <- function(matrix) {
-    originalMatrix <<- matrix
-    invertedMatrix <<- NULL
+    ## No need to calculate inverted if originalMatrix and matrix are the same
+    if (!identical(originalMatrix, matrix)) {
+      message("updating original matrix")
+      originalMatrix <<- matrix
+      invertedMatrix <<- NULL
+    }
   }
   
   getInverted <- function() invertedMatrix
